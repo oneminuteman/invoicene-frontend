@@ -1,25 +1,25 @@
 package com.example.neinvoice;
 
+import android.content.Context;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-    private static final String BASE_URL = "https://192.168.100.3:3001/";
-    private static Retrofit retrofit;
+    private static final String BASE_URL = "https://10.0.2.2:3001/";
 
-    // Singleton instance of Retrofit
-    public static Retrofit getRetrofit() {
-        if (retrofit == null) {
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-        }
-        return retrofit;
-    }
+    public static ApiService getApiService(Context context) {
+        // Get an OkHttpClient that supports SSL
+        OkHttpClient client = SSLHelper.getSafeOkHttpClient(context);
 
-    // Convenience method to create an API Service
-    public static ApiService getApiService() {
-        return getRetrofit().create(ApiService.class);
+        // Create Retrofit instance using the SSL-configured OkHttpClient
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(ApiService.class);
     }
 }
+

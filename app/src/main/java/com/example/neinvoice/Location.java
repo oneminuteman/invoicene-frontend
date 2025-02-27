@@ -1,8 +1,10 @@
 package com.example.neinvoice;
 
 import com.google.gson.annotations.SerializedName;
+import java.util.List;
 
 public class Location {
+
     @SerializedName("id")
     private int id;
 
@@ -15,16 +17,11 @@ public class Location {
     @SerializedName("updated_at")
     private String updatedAt;
 
-    // Default constructor
-    public Location() {
-    }
+    @SerializedName("customers")
+    private List<Customer> customers; // Add customers field to match backend
 
-    // Parameterized constructor for convenience
-    public Location(int id, String name, String createdAt, String updatedAt) {
-        this.id = id;
-        this.name = name;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+    // Default constructor (required for Retrofit)
+    public Location() {
     }
 
     // Getters and Setters
@@ -60,6 +57,14 @@ public class Location {
         this.updatedAt = updatedAt;
     }
 
+    public List<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
+    }
+
     @Override
     public String toString() {
         return "Location{" +
@@ -67,7 +72,7 @@ public class Location {
                 ", name='" + name + '\'' +
                 ", createdAt='" + createdAt + '\'' +
                 ", updatedAt='" + updatedAt + '\'' +
+                ", customers=" + customers +
                 '}';
     }
 }
-

@@ -1,6 +1,7 @@
 package com.example.neinvoice;
 
 import com.google.gson.annotations.SerializedName;
+import java.util.List;
 
 public class Customer {
     @SerializedName("id")
@@ -12,15 +13,17 @@ public class Customer {
     @SerializedName("location_id")
     private int locationId;
 
-    // Default constructor
+    @SerializedName("monthly_consumptions") // Maps to backend field
+    private List<Consumption> monthlyConsumptions;
+
     public Customer() {
     }
 
-    // Parameterized constructor for convenience
-    public Customer(int id, String name, int locationId) {
+    public Customer(int id, String name, int locationId, List<Consumption> monthlyConsumptions) {
         this.id = id;
         this.name = name;
         this.locationId = locationId;
+        this.monthlyConsumptions = monthlyConsumptions;
     }
 
     // Getters and Setters
@@ -48,12 +51,22 @@ public class Customer {
         this.locationId = locationId;
     }
 
+    public List<Consumption> getMonthlyConsumptions() {
+        return monthlyConsumptions;
+    }
+
+    public void setMonthlyConsumptions(List<Consumption> monthlyConsumptions) {
+        this.monthlyConsumptions = monthlyConsumptions;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", locationId=" + locationId +
+                ", monthlyConsumptions=" + monthlyConsumptions +
                 '}';
     }
 }
+

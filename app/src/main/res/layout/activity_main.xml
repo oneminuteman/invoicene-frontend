@@ -7,12 +7,53 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/btnOjogiDrive"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/ojogi_drive"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/btnPromise"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/promise"
+        app:layout_constraintTop_toBottomOf="@id/btnOjogiDrive"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/btnThorngroove"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/thorngroove"
+        app:layout_constraintTop_toBottomOf="@id/btnPromise"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/btnVantage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/vantage"
+        app:layout_constraintTop_toBottomOf="@id/btnThorngroove"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnVantage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

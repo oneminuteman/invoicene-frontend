@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -9,7 +10,25 @@
         android:id="@+id/tvCustomerName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Customer Name"
+        android:text="@string/customer_name"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/tvConsumptionDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:padding="8dp"
+        android:textColor="@android:color/darker_gray"/>
+
+    <Button
+        android:id="@+id/btnProcessInvoice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/process_invoice"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:textColor="@android:color/white"/>
 </LinearLayout>

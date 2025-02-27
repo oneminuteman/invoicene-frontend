@@ -1,21 +1,22 @@
 package com.example.neinvoice;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import androidx.annotation.NonNull;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.List;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class CustomerListActivity extends AppCompatActivity {
+import java.util.List;
+
+public class CustomerListActivity extends AppCompatActivity implements CustomerAdapter.OnInvoiceProcessListener {
 
     private RecyclerView recyclerView;
     private CustomerAdapter customerAdapter;
+    private int locationId;
+    private String locationName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,31 +26,40 @@ public class CustomerListActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewCustomers);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        fetchCustomers();
+        // Get location ID and name from Intent
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("LOCATION_ID") && intent.hasExtra("LOCATION_NAME")) {
+            int tempLocationId = intent.getIntExtra("LOCATION_ID", -1);
+
+            // Ensure locationId is within allowed values (6, 7, 8, 9)
+            if (tempLocationId == 6 || tempLocationId == 7 || tempLocationId == 8 || tempLocationId == 9) {
+                locationId = tempLocationId;
+                locationName = intent.getStringExtra("LOCATION_NAME");
+            } else {
+                Log.e("CustomerListActivity", "Invalid location ID: " + tempLocationId);
+                Toast.makeText(this, "Invalid location selected", Toast.LENGTH_SHORT).show();
+                finish();
+                return;
+            }
+        }
+
+        // Get customer list from intent
+        if (intent.hasExtra("CUSTOMER_LIST")) {
+            List<Customer> customerList = (List<Customer>) intent.getSerializableExtra("CUSTOMER_LIST");
+
+            if (customerList != null) {
+                customerAdapter = new CustomerAdapter(customerList, this); // Pass this as the listener
+                recyclerView.setAdapter(customerAdapter);
+            } else {
+                Log.e("CustomerListActivity", "No customers received from intent");
+                Toast.makeText(this, "No customers available", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
-    private void fetchCustomers() {
-        ApiService apiService = RetrofitInstance.getRetrofit().create(ApiService.class);
-
-        apiService.getCustomers().enqueue(new Callback<List<Customer>>() {
-            @Override
-            public void onResponse(Call<List<Customer>> call, Response<List<Customer>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    List<Customer> customers = response.body();
-                    customerAdapter = new CustomerAdapter(customers);
-                    recyclerView.setAdapter(customerAdapter);
-                } else {
-                    Log.e("CustomerListActivity", "Failed to fetch customers: " + response.message());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Customer>> call, Throwable t) {
-                Log.e("CustomerListActivity", "Error fetching customers", t);
-            }
-        });
+    @Override
+    public void onProcessInvoice(Customer customer) {
+        // Handle invoice processing here
+        Toast.makeText(this, "Processing invoice for " + customer.getName(), Toast.LENGTH_SHORT).show();
     }
 }
-
-
-

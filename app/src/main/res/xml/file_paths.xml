@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- Internal Storage (app-specific) -->
+    <files-path name="invoices" path="invoices/" />
+
+    <!-- External Storage (app-specific) -->
+    <external-files-path name="invoices" path="Invoices/" />
+
+    <!-- Shared External Storage (for documents, requires permission) -->
+    <external-path name="documents" path="Documents/Invoices/" />
+</paths>
+

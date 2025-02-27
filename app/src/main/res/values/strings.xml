@@ -1,3 +1,29 @@
 <resources>
+    <!-- App Name -->
     <string name="app_name">NEInvoice</string>
+
+    <!-- Buttons and Descriptions -->
+    <string name="process_invoices">Process Invoices</string>
+    <string name="process_invoices_button_description">Press to process all invoices</string>
+    <string name="invoices_scrollview_description">Scrollable area for generated invoices</string>
+
+    <!-- Customer-Related Strings -->
+    <string name="error_fetch_customers">Failed to fetch customers</string>
+    <string name="invoice_generated">Invoice generated for %1$s</string>
+    <string name="error_generate_invoice">Failed to generate invoice: %1$s</string>
+    <string name="invoice_ready">%1$s: Invoice ready for download</string>
+    <string name="download_pdf">Download PDF</string>
+    <string name="download_successful">Downloaded %1$s\'s invoice</string>
+
+        <string name="customer_name">Customer Name</string>
+        <string name="process_invoice">Process Invoice</string>
+        <string name="no_consumption_data">No consumption data available</string>
+
+
+
+    <!-- Locations -->
+    <string name="ojogi_drive">Ojogi Drive</string>
+    <string name="promise">Promise</string>
+    <string name="thorngroove">Thorngroove</string>
+    <string name="vantage">Vantage</string>
 </resources>
